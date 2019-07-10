@@ -1,44 +1,49 @@
 <template>
     <div>
-        <mt-swipe :auto="4000">
-            <mt-swipe-item v-for="item in lunbotulist" :key="item.src" :style="{backgroundImage: 'url( '+item.url+' )'}">
-                
-            </mt-swipe-item>
-        </mt-swipe>
+
+        <lunbotu-box :lunbotulist="lunbotulist" :lunbotuwh="lunbotuwh"> </lunbotu-box>
+
         <div id="gridlist">
 		        <ul class="mui-table-view mui-grid-view mui-grid-9">
 		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" 
                     v-for="item in gridlist" :key="item.src">
-                        <a href="#">
+                        <router-link :to="item.gridlistrouter">
 		                    <img :src="item.src" alt="">
 		                    <div class="mui-media-body">{{item.name}}</div>
-                        </a>
+                        </router-link>
                     </li>
-		           
 		        </ul> 
 		</div>
+        <del class="red">111111</del>
     </div>
 </template>
 
 <script>
+// import '../../css/base.css'
+import lunbotu from '../subcomponents/Lunbotu.vue'
 export default {
     data(){
         return {
+            lunbotuwh: {h:true , w:false},
+            msg: 'hahahahha',
             lunbotulist: [
-                {url: '/src/images/1-1F409101606439.jpg'},
-                {url: '/src/images/1-1F409101644U4.jpg'},
-                {url: '/src/images/1-1F409101452301.jpg'}
+                {url: '/src/images/commodity4.png'},
+                {url: '/src/images/commodity4.png'},
+                {url: '/src/images/commodity4.png'}
             ],
             gridlist: [
-                {src: '/src/images/menu1.png', name: 111},
-                {src: '/src/images/menu2.png', name: 222},
-                {src: '/src/images/menu3.png', name: 333},
-                {src: '/src/images/menu4.png', name: 444},
-                {src: '/src/images/menu5.png', name: 555},
-                {src: '/src/images/menu6.png', name: 666},
-            ]
+                {src: '/src/images/menu1.png', name: '新闻资讯', gridlistrouter: '/homepage/newlist'},
+                {src: '/src/images/menu2.png', name: '图片分享', gridlistrouter: '/homepage/photo'},
+                {src: '/src/images/menu3.png', name: '商品购买', gridlistrouter: '/homepage/shopping'},
+                {src: '/src/images/menu4.png', name: '留言反馈', gridlistrouter: '/homepage/feedback'},
+                {src: '/src/images/menu5.png', name: '视频专区', gridlistrouter: '/homepage/Video'},
+                {src: '/src/images/menu6.png', name: '联系我们', gridlistrouter: '/homepage/contact-us'}
+            ],
             
         }
+    },
+    components: {
+        'lunbotu-box':lunbotu
     },
     created(){
         // this.getlunbotu()
@@ -75,6 +80,9 @@ export default {
             border: none;
             img {
                 width: 70%;
+            }
+            .mui-media-body{
+                font-size: 12px;
             }
         }
         
